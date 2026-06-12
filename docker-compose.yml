@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  test:
+    build: .
+    command: pytest -v -s --html=report.html
+    volumes:
+      - .:/app
