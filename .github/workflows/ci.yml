@@ -3,7 +3,7 @@ on:
   push:
     branches: [main,master]
   pull_request:
-    branches: [main.master]
+    branches: [main,master]
 
 jobs:
   test-push:
@@ -26,10 +26,10 @@ jobs:
 
       - name: 登录阿里云
         run: |
-          echo "${{ALIYUN_PASSWORD}}" | docker login --username=${{ALIYUN_USERNAME}} crpi-u2e370cqx4idzcz9.cn-guangzhou.personal.cr.aliyuncs.com --password-stdin
+          echo "${{secrets.ALIYUN_PASSWORD}}" | docker login --username=${{secrets.ALIYUN_USERNAME}} crpi-u2e370cqx4idzcz9.cn-guangzhou.personal.cr.aliyuncs.com --password-stdin
 
       - name: 构建镜像
-        run: docker build -t crpi-u2e370cqx4idzcz9.cn-guangzhou.personal.cr.aliyuncs.com --password-stdin .
+        run: docker build -t crpi-u2e370cqx4idzcz9.cn-guangzhou.personal.cr.aliyuncs.com/lxself-test/my-note-test:latest .
 
       - name: 推送镜像
         run: docker push crpi-u2e370cqx4idzcz9.cn-guangzhou.personal.cr.aliyuncs.com/lxself-test/my-note-test:latest
